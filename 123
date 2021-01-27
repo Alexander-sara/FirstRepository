@@ -12,10 +12,10 @@ namespace Shifrator
         static void EncryptFile(string originalFile, string encryptedFile, string keyFile)
         {
             // Чтение байтов исходного файла
-            byte[] sourceBytes;
-            using (FileStream fs = new FileStream(originalFile, FileMode.Open))
+            byte[] sourcesBytes;
+            using (FileStream fs = new FileStream(sourceFile, FileMode.Open))
             {
-                sourceBytes = new byte[fs.Length];
+                sourcesBytes = new byte[fs.Length];
                 fs.Read(sourceBytes, 0, sourceBytes.Length);
             }
             //Создаем одноразовый ключ для шифрования
