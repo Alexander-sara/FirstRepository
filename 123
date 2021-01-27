@@ -8,18 +8,18 @@ namespace Shifrator
 {
     class Program
     {
-        //функция шифрования
+        //метод для шифра одноразовым блокнотом
         static void EncryptFile(string originalFile, string encryptedFile, string keyFile)
         {
             // Чтение байтов исходного файла
-            byte[] originalBytes;
-            using (FileStream fs = new FileStream(originalFile, FileMode.Open))
+            byte[] sourcesBytes;
+            using (FileStream fs = new FileStream(sourceFile, FileMode.Open))
             {
-                originalBytes = new byte[fs.Length];
-                fs.Read(originalBytes, 0, originalBytes.Length);
+                sourcesBytes = new byte[fs.Length];
+                fs.Read(sourceBytes, 0, sourceBytes.Length);
             }
             //Создаем одноразовый ключ для шифрования
-            byte[] keyBytes = new byte[originalBytes.Length];
+            byte[] keyBytes = new byte[sourceBytes.Length];
             Random random = new Random();
             random.NextBytes(keyBytes);
             //Записываем ключ в файл
@@ -28,8 +28,8 @@ namespace Shifrator
                 fs.Write(keyBytes, 0, keyBytes.Length);
             }
             // Шифрование данных с помощью алгоритма Вернама
-            byte[] encryptedBytes = new byte[originalBytes.Length];
-            DoShifr(originalBytes, keyBytes, ref encryptedBytes);
+            byte[] encryptedBytes = new byte[sourceBytes.Length];
+            DoShifr(sourceBytes, keyBytes, ref encryptedBytes);
             //Записываем зашифрованный файл
             using (FileStream fs = new FileStream(encryptedFile, FileMode.Create))
             {
@@ -73,3 +73,4 @@ namespace Shifrator
         }
     }
 }
+
